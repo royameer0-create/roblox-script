@@ -1,0 +1,36 @@
+-- Fish It Roblox Script: Instant Fishing & Track Spot
+
+-- Fungsi instant fishing
+spawn(function()
+    while wait() do
+        local fishingGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("FishingGui")
+        if fishingGui then
+            local castButton = fishingGui:FindFirstChild("Cast")
+            if castButton then
+                castButton:FireClick()
+            end
+            local reelButton = fishingGui:FindFirstChild("Reel")
+            if reelButton then
+                reelButton:FireClick()
+            end
+        end
+    end
+end)
+
+-- Fungsi track tempat pancing terbaik
+spawn(function()
+    while wait() do
+        for _, spot in pairs(game.Workspace:FindFirstChild("FishingSpots"):GetChildren()) do
+            if spot:FindFirstChild("Active") and spot.Active.Value == true then
+                local billboard = Instance.new("BillboardGui", spot)
+                billboard.Size = UDim2.new(0, 200, 0, 50)
+                billboard.StudsOffset = Vector3.new(0, 3, 0)
+                local text = Instance.new("TextLabel", billboard)
+                text.Text = "Spot Terbaik!"
+                text.Size = UDim2.new(1, 0, 1, 0)
+                text.BackgroundTransparency = 1
+                text.TextColor3 = Color3.new(0, 1, 0)
+            end
+        end
+    end
+end)
